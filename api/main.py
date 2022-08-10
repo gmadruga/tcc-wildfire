@@ -1,0 +1,1 @@
+from fastapi impot FastAPi
