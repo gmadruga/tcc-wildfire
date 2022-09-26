@@ -45,5 +45,9 @@ class SensorSimulate:
             print(r.text)
             time.sleep(frequency)
 
-
 #%%
+
+sensor1 = SensorSimulate(device_id=1,init_temp=20,init_humidity=30,latitude= 22.54,longitude=334.53)
+sensor1.run(frequency=30)
+
+

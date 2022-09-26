@@ -22,7 +22,7 @@ def run(controler):
             if response == "NEW_DEVICE":
                 controler.add_device(msg)
             if response == "CHECK_MSG":
-                controler.process__msg()
+                controler.process__msg(msg)
 
     pass
 
@@ -43,6 +43,7 @@ class WildfireControler:
     def filter_msg(self,new_msg):
         new_msg = new_msg[1]
         device_id = new_msg[b'device_id'].decode('utf-8')
+        print(self.control_df.head())
         device_row = self.control_df[self.control_df['device_id'] == device_id]
         if len(device_row):
             last_msg_time = datetime.strptime(device_row['last_msg_time'],time_encode)
@@ -53,6 +54,23 @@ class WildfireControler:
                 return "NOTHING_TO_DO"
         else:
             return "NEW_DEVICE"
+        pass
+
+    def add_device(self,new_msg):
+        new_msg = new_msg[1]
+        device_id = int(new_msg[b'device_id'].decode('utf-8'))
+        latitude = float(new_msg[b'lat'].decode('utf-8'))
+        longitude = float(new_msg[b'lon'].decode('utf-8'))
+        last_msg = str(new_msg[b'time'].decode('utf-8'))
+        fields = {'device_id':device_id,
+        'latitude':latitude,
+        'longitude':longitude,
+        'heat_warning_level':0,
+        'humidity_warning_level':0,
+        'last_msg_time':last_msg}
+        
+        self.control_df = self.control_df.append(data=fields,ignore_index=True)
+        
         pass
 
 
@@ -88,7 +106,7 @@ class WildfireControler:
   
 
 if __name__ == '__main__':
-    start_controler()
-    run()
+    contr = start_controler()
+    run(contr)
 
     #%%
