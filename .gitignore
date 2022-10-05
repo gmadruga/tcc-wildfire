@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+dataset/*
+!dataset/dataset_info.md 
