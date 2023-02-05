@@ -118,16 +118,6 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-
-dataset/*
-!dataset/dataset_info.md 
+data/*
+models/*
+.env
