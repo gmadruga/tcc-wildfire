@@ -3,6 +3,7 @@ import random
 import json
 import time 
 
+
 class SensorSimulate:
     def __init__(self,device_id,init_temp,init_humidity,latitude,longitude) -> None:
         self.device_id = device_id

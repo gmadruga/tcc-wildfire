@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import redis
+import uvicorn
 from datetime import datetime
 
 class Item(BaseModel):
@@ -35,3 +36,6 @@ async def insert_data(item: Item):
     redis_at.xadd(stream, fields)
     return "SEND"
 
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=8000)
