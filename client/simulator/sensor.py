@@ -5,13 +5,14 @@ import time
 
 
 class SensorSimulate:
-    def __init__(self,device_id,init_temp,init_humidity,latitude,longitude) -> None:
-        self.device_id = device_id
-        self.temp = init_temp
-        self.humidity = init_humidity
-        self.latitude = latitude
-        self.longitude = longitude
-        pass
+    def __init__(self,config_dict) -> None:
+        self.device_id = config_dict["id"]
+        self.temp = config_dict["initial_temperature"]
+        self.humidity =  config_dict["initial_humidity"]
+        self.latitude = config_dict["latitude"]
+        self.longitude = config_dict["longitude"]
+        self.delay = config_dict["delay_time"]
+        self.run(self.delay)
 
     def run(self,frequency):
         while True:
@@ -48,7 +49,6 @@ class SensorSimulate:
 
 #%%
 
-sensor1 = SensorSimulate(device_id=1,init_temp=20,init_humidity=30,latitude= 22.54,longitude=334.53)
-sensor1.run(frequency=30)
+# sensor1 = SensorSimulate(device_id=1,init_temp=20,init_humidity=30,latitude= 22.54,longitude=334.53,delay_time=1)
 
 

@@ -118,6 +118,6 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-data/*
 models/*
 .env
+__pycache__/*
