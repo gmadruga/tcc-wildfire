@@ -5,7 +5,12 @@ import time
 
 
 class SensorSimulate:
-    def __init__(self,config_dict) -> None:
+    """
+        Classe responsavel em realizar a simulação do modulo sensorial 
+        utilizado no projeto.
+    """
+
+    def __init__(self, config_dict: dict) -> None:
         self.device_id = config_dict["id"]
         self.temp = config_dict["initial_temperature"]
         self.humidity =  config_dict["initial_humidity"]
@@ -14,7 +19,14 @@ class SensorSimulate:
         self.delay = config_dict["delay_time"]
         self.run(self.delay)
 
-    def run(self,frequency):
+    def run(self,frequency: int) -> None:
+        """
+        Executa a simulação do sensor:
+         
+           Args:
+                frequency (int): Tempo de espera entre duas requisições
+           
+        """
         while True:
             t_sum_or_sub = random.random()
             h_sum_or_sub = random.random()

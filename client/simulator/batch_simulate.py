@@ -19,4 +19,4 @@ def simulate(json_path: str):
             print(cod)
 
 if __name__ == '__main__':
-    simulate("/home/gabrielmadruga/Documents/Github/tcc-wildfire/client/simulator/data/simulation_context.json")
+    simulate("/home/gabrielmadruga/Documents/Github/tcc-wildfire/client/simulator/config/simulation_context.json")

@@ -21,9 +21,11 @@ app = FastAPI()
 
 @app.post("/insert_data/")
 async def insert_data(item: Item):
-    stream = "temp_data"
-    time = datetime.now().strftime(time_encode)
 
+    sensor_stream = f"device_{str(item.device_id)}"
+    general_stream = "temp_data"
+
+    time = datetime.now().strftime(time_encode)
     fields = {
         "device_id":item.device_id,
         "temperature":item.temperature,
@@ -31,9 +33,10 @@ async def insert_data(item: Item):
         "lat":item.lat,
         "lon":item.lon,
         "time":time
-        }   
+        }
     redis_at = redis.Redis(host=redis_hostname,port=redis_port)
-    redis_at.xadd(stream, fields)
+    redis_at.xadd(general_stream, fields)
+    redis_at.xadd(sensor_stream, fields)
     return "SEND"
 
 

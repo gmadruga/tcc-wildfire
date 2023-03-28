@@ -9,6 +9,7 @@ redis_port = "6379"
 time_encode = "%d/%m/%Y, %H:%M:%S"
 redis_stream = "temp_data"
 
+
 def start_controler():
     controler = WildfireControler(30,30,'temp_data')
     controler.connect_redis(redis_port,redis_hostname)
