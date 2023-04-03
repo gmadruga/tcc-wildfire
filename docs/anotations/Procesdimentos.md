@@ -12,6 +12,8 @@ A ligação entre o sensor de temperatura e o arduino Uno deve ser feita da segu
 
 - Subir o Redis
 - Subir a API
+- Subir as Simulações
+
 
 ### Acesso 
 - Para realizar requisições dentro da mesma máquina, apontaremos pro localhoost (ou seja 127.0.0.1:8000)

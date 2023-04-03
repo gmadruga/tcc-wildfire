@@ -26,7 +26,7 @@ async def insert_data(item: Item):
     general_stream = "temp_data"
 
     time = datetime.now().strftime(time_encode)
-    fields = {
+    general_fields = {
         "device_id":item.device_id,
         "temperature":item.temperature,
         "humidity":item.humidity,
@@ -34,9 +34,16 @@ async def insert_data(item: Item):
         "lon":item.lon,
         "time":time
         }
-    redis_at = redis.Redis(host=redis_hostname,port=redis_port)
-    redis_at.xadd(general_stream, fields)
-    redis_at.xadd(sensor_stream, fields)
+    
+    device_fields = {
+        "temperature":item.temperature,
+        "humidity":item.humidity,
+        "time":time
+    }
+
+    redis_at = redis.Redis(host=redis_hostname,port=redis_port) # type: ignore
+    redis_at.xadd(general_stream, general_fields)
+    redis_at.xadd(sensor_stream, device_fields)
     return "SEND"
 
 

@@ -28,22 +28,23 @@ class SensorSimulate:
            
         """
         while True:
-            t_sum_or_sub = random.random()
-            h_sum_or_sub = random.random()
-            t_multiplier = random.randint(1,3)
-            h_multiplier = random.randint(1,3)
-            temp = random.random()
-            humi = random.random()
+            if self.device_id > 0:
+                t_sum_or_sub = random.random()
+                h_sum_or_sub = random.random()
+                t_multiplier = random.randint(1,3)
+                h_multiplier = random.randint(1,3)
+                temp = random.random()
+                humi = random.random()
 
-            if t_sum_or_sub > 0.5:
-                self.temp = self.temp + temp*t_multiplier 
-            else:
-                self.temp = self.temp - temp*t_multiplier 
+                if t_sum_or_sub > 0.5:
+                    self.temp = self.temp + temp*t_multiplier 
+                else:
+                    self.temp = self.temp - temp*t_multiplier 
 
-            if h_sum_or_sub > 0.5:
-                self.humidity = self.humidity + humi*h_multiplier 
-            else:
-                self.humidity = self.humidity - humi*h_multiplier 
+                if h_sum_or_sub > 0.5:
+                    self.humidity = self.humidity + humi*h_multiplier 
+                else:
+                    self.humidity = self.humidity - humi*h_multiplier 
 
             fields = {
                 "device_id":self.device_id,

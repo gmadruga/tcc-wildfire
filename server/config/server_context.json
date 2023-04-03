@@ -1,0 +1,18 @@
+{
+    "REDIS": {
+        "HOSTNAME": "127.0.0.1",
+        "PORT": "6379",
+        "GENERAL_STREAM" : "temp_data",
+        "DEVICES_KEY":"controler:devices_on",
+        "COUNT_MESSAGES_KEY":"controler:qty_processed_messages",
+        "WARNING_KEY":"controler:alarm"
+    },
+    "CONTROLER": {
+        "TIME_ENCODE": "%d/%m/%Y, %H:%M:%S",
+        "TEMPERATURE_THRESHOLD":30,
+        "HUMIDITY_THRESHOLD":30,
+        "MAX_FACTOR_WITHOUT_MESSAGE":3,
+        "MAX_TEMPERATURE_THRESHOLD":5,
+        "MAX_HUMIDITY_THRESHOLD":5
+    }
+}
