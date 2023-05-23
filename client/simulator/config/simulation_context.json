@@ -1,36 +1,46 @@
 {
- "sensors": [
+ "sensors":  [
     {
-        "id":1,
-        "initial_temperature":25,
-        "initial_humidity":70,
-        "latitude":-22.956,
-        "longitude":-43.224,
-        "delay_time":10
+        "id": 1,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "delay_time": 10
     },
     {
-        "id":2,
-        "initial_temperature":25,
-        "initial_humidity":70,
-        "latitude":-22.957,
-        "longitude":-43.262,
-        "delay_time":10
+        "id": 2,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "delay_time": 10
     },
     {
-        "id":3,
-        "initial_temperature":25,
-        "initial_humidity":70,
-        "latitude":-22.939777,
-        "longitude":-43.29419823,
-        "delay_time":10
+        "id": 3,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "delay_time": 10
     },
     {
-        "id":4,
-        "initial_temperature":25,
-        "initial_humidity":70,
-        "latitude":-22.857,
-        "longitude":-43.292,
-        "delay_time":10
+        "id": 4,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "delay_time": 10
     }
- ]    
+ ],
+
+ "fire":  [
+    {
+        "latitude": -22.48,
+        "longitude": -43.20,
+        "fire_propagation_rate":  1,
+        "temperature_wave": "",
+        "humidity_wave": ""
+    }
+]
 }

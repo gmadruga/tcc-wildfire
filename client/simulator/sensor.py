@@ -2,7 +2,10 @@ import requests
 import random
 import json
 import time 
+import numpy as np 
+import geopy.distance
 
+CONTEXT_PATH = "/home/gabrielmadruga/Documents/Github/tcc-wildfire/client/simulator/config/simulation_context.json"
 
 class SensorSimulate:
     """
@@ -11,14 +14,16 @@ class SensorSimulate:
     """
 
     def __init__(self, config_dict: dict) -> None:
+        
         self.device_id = config_dict["id"]
         self.temp = config_dict["initial_temperature"]
         self.humidity =  config_dict["initial_humidity"]
         self.latitude = config_dict["latitude"]
         self.longitude = config_dict["longitude"]
         self.delay = config_dict["delay_time"]
+        self.fire_distance = None
         self.run(self.delay)
-
+        
     def run(self,frequency: int) -> None:
         """
         Executa a simulação do sensor:
@@ -28,28 +33,19 @@ class SensorSimulate:
            
         """
         while True:
-            if self.device_id > 0:
-                t_sum_or_sub = random.random()
-                h_sum_or_sub = random.random()
-                t_multiplier = random.randint(1,3)
-                h_multiplier = random.randint(1,3)
-                temp = random.random()
-                humi = random.random()
+            self.calculate_fire_distance(CONTEXT_PATH)
+            
+            humidity = self.calculate_humidity(humidity=self.humidity,dist=self.fire_distance)
 
-                if t_sum_or_sub > 0.5:
-                    self.temp = self.temp + temp*t_multiplier 
-                else:
-                    self.temp = self.temp - temp*t_multiplier 
+            temperature = self.calculate_temperature(dist=self.fire_distance,
+                                                      temperature=self.temp)
 
-                if h_sum_or_sub > 0.5:
-                    self.humidity = self.humidity + humi*h_multiplier 
-                else:
-                    self.humidity = self.humidity - humi*h_multiplier 
+            print("Device:",self.device_id," - fire_distance:", self.fire_distance)
 
             fields = {
                 "device_id":self.device_id,
-                "temperature":self.temp,
-                "humidity":self.humidity,
+                "temperature":temperature,
+                "humidity":humidity,
                 "lat":self.latitude,
                 "lon":self.longitude
                 }   
@@ -59,6 +55,35 @@ class SensorSimulate:
             print("Message Sent:", str(json_object))
             print(r.text)
             time.sleep(frequency)
+
+
+    def calculate_temperature(self, dist, temperature=27, k=500):
+        if dist < 0:
+            temperature = temperature + (np.random.normal(0,1,1))
+        else:       
+            temperature = temperature + k/dist + (np.random.normal(0,1,1))
+        return temperature[0]
+
+
+    def calculate_humidity(self, humidity, dist, k=1):
+            if dist < 0:
+                humidity =  humidity + (np.random.normal(0,1,1)/100)
+            else:   
+                humidity =  humidity/np.exp(1/(k*dist)) + (np.random.normal(0,1,1)/100)
+            return humidity[0]
+
+
+    def calculate_fire_distance(self, path, k=3):
+        if self.fire_distance == None:
+            file = json.load(open(path))["fire"][0]
+            self.fire_distance = geopy.distance.geodesic((self.latitude,self.longitude),(file["latitude"],file["longitude"])).m 
+            print(self.fire_distance)
+        else:
+            self.fire_distance = self.fire_distance - random.random()*k
+        pass
+
+
+
 
 #%%
 
