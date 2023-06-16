@@ -5,7 +5,7 @@ import time
 import numpy as np 
 import geopy.distance
 
-CONTEXT_PATH = "/home/gabrielmadruga/Documents/Github/tcc-wildfire/client/simulator/config/simulation_context.json"
+CONTEXT_PATH = "config/simulation_context.json"
 
 class SensorSimulate:
     """
@@ -35,12 +35,11 @@ class SensorSimulate:
         while True:
             self.calculate_fire_distance(CONTEXT_PATH)
             
-            humidity = self.calculate_humidity(humidity=self.humidity,dist=self.fire_distance)
+            humidity = self.calculate_humidity(self.humidity,self.fire_distance)
 
-            temperature = self.calculate_temperature(dist=self.fire_distance,
-                                                      temperature=self.temp)
+            temperature = self.calculate_temperature(self.temp,self.fire_distance)
 
-            print("Device:",self.device_id," - fire_distance:", self.fire_distance)
+            print(f"\nDevice_id: {self.device_id} - Fire Distance: {round(self.fire_distance,2)} m")
 
             fields = {
                 "device_id":self.device_id,
@@ -52,12 +51,14 @@ class SensorSimulate:
             json_object = json.dumps(fields, indent = 4) 
 
             r = requests.post('http://127.0.0.1:8000/insert_data/',data = json_object)
-            print("Message Sent:", str(json_object))
-            print(r.text)
+            if r.status_code == 200:
+                print(f"Your message has been sent:\n {str(json_object)}")
+            else:
+                print(f"Something wrong with message:\n {str(json_object)}")
             time.sleep(frequency)
 
 
-    def calculate_temperature(self, dist, temperature=27, k=500):
+    def calculate_temperature(self, temperature,dist, k=500):
         if dist < 0:
             temperature = temperature + (np.random.normal(0,1,1))
         else:       
@@ -77,7 +78,6 @@ class SensorSimulate:
         if self.fire_distance == None:
             file = json.load(open(path))["fire"][0]
             self.fire_distance = geopy.distance.geodesic((self.latitude,self.longitude),(file["latitude"],file["longitude"])).m 
-            print(self.fire_distance)
         else:
             self.fire_distance = self.fire_distance - random.random()*k
         pass
