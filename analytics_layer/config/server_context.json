@@ -7,12 +7,15 @@
         "COUNT_MESSAGES_KEY":"controler:qty_processed_messages",
         "WARNING_KEY":"controler:alarm"
     },
-    "CONTROLER": {
+    "WILDFIRE_CONTROLER": {
         "TIME_ENCODE": "%d/%m/%Y, %H:%M:%S",
         "TEMPERATURE_THRESHOLD":30,
         "HUMIDITY_THRESHOLD":30,
         "MAX_FACTOR_WITHOUT_MESSAGE":3,
         "MAX_TEMPERATURE_THRESHOLD":5,
         "MAX_HUMIDITY_THRESHOLD":5
+    },
+    "GCLOUD_SCHEDULER": {
+        "COMPRESS_RATE":5
     }
 }

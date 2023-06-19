@@ -43,7 +43,7 @@ async def insert_data(item: Item):
 
     redis_at = redis.Redis(host=redis_hostname,port=redis_port) # type: ignore
     redis_at.xadd(general_stream, general_fields)
-    redis_at.xadd(sensor_stream, device_fields)
+    # redis_at.xadd(sensor_stream, device_fields)
     return "SEND"
 
 

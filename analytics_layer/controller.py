@@ -3,27 +3,15 @@ import json
 import redis
 from datetime import datetime,timedelta
 
-config_file = open("/home/gabrielmadruga/Documents/Github/tcc-wildfire/server/config/server_context.json")
+config_file = open("analytics_layer/config/server_context.json")
 config = json.load(config_file) 
 REDIS = config["REDIS"]
-CONTROLER = config["CONTROLER"]
-
-
-def run(controler):
-    while True:
-        new_msgs = controler.check_redis_new_messages()
-        for msg in new_msgs:
-            response = controler.is_new_device(msg)
-            if response:
-                controler.process_msgs(msg)
-            else:
-                controler.add_device(msg)
-        controler.check_devices()
+CONTROLER = config["WILDFIRE_CONTROLER"]
 
 
 class WildfireControler:
+
     def __init__(self) -> None: 
-        self.last_total_msgs = 0
         self.device_ids = [] 
         pass         
 
@@ -32,7 +20,6 @@ class WildfireControler:
         pass
     
     def is_new_device(self,new_msg) -> bool:
-        new_msg = new_msg[1]
         device_id = int(new_msg[b"device_id"].decode("utf-8"))
         device_key = f"controler:device_{device_id}"
         sensor_status = self.redis_at.get(device_key)
@@ -41,12 +28,12 @@ class WildfireControler:
         return False
     
     def add_device(self,new_msg):
-        new_msg = new_msg[1]
         device_id = int(new_msg[b"device_id"].decode("utf-8"))
         latitude = float(new_msg[b"lat"].decode("utf-8"))
         longitude = float(new_msg[b"lon"].decode("utf-8"))
         last_msg = str(new_msg[b"time"].decode("utf-8"))
-        fields = {"device_id":device_id,
+        fields ={
+            "device_id":device_id,
             "latitude":latitude,
             "longitude":longitude,
             "temperature_warning_level":0,
@@ -60,7 +47,6 @@ class WildfireControler:
         self.redis_at.lpush(REDIS["DEVICES_KEY"],device_id)
 
     def process_msgs(self,new_msg):
-        new_msg = new_msg[1]
         device_id = int(new_msg[b"device_id"].decode("utf-8"))
         device_key = f"controler:device_{device_id}"
         sensor_status = self.redis_at.get(device_key)
@@ -98,23 +84,31 @@ class WildfireControler:
   
         return actual_status
 
-    def check_redis_new_messages(self) -> list:
-        total_msgs = len(self.redis_at.xrange(REDIS["GENERAL_STREAM"]))
-        if self.redis_at.get(REDIS["COUNT_MESSAGES_KEY"]):
-            self.last_total_msgs = int(self.redis_at.get(REDIS["COUNT_MESSAGES_KEY"]).decode("utf-8"))
+    def check_redis_new_messages(self,last_message_id) -> list:
 
-        qty_new_msgs = total_msgs - self.last_total_msgs # type: ignore
-        
-        if qty_new_msgs == 0:
-            return []
-        
-        new_msgs = self.redis_at.xrevrange(REDIS["GENERAL_STREAM"], count=qty_new_msgs)
-        new_msgs.reverse()
-        self.redis_at.set(REDIS["COUNT_MESSAGES_KEY"],total_msgs) # type: ignore
-        return new_msgs
+        if last_message_id:
+            new_msgs = self.redis_at.xrevrange(REDIS["GENERAL_STREAM"],min=str(last_message_id))
+        else:
+            new_msgs = self.redis_at.xrevrange(REDIS["GENERAL_STREAM"])
+        self.push_last_message_id(new_msgs[0])
+    
+        return new_msgs[:-1]
   
-    def check_devices(self):
-        
+    def push_last_message_id(self,message):
+        message_key = message[0].decode('utf-8')
+        self.redis_at.set("last_read_message_key",message_key)    
+        return message_key
+
+    def get_last_message_id(self):
+        try:
+            last_message_id = self.redis_at.get("last_read_message_key")
+            last_message_id = last_message_id.decode("utf-8") # type: ignore
+        except:
+            last_message_id = None
+        return last_message_id
+
+
+    def check_devices(self):   
         first_device = int(self.redis_at.lpop(REDIS["DEVICES_KEY"]).decode("utf-8"))
         new_device = -1
         while first_device != new_device:
@@ -140,17 +134,27 @@ class WildfireControler:
                 warning_message = {"message":warning_message}
                 self.redis_at.xadd(REDIS["WARNING_KEY"],warning_message)
 
-
             self.redis_at.rpush(REDIS["DEVICES_KEY"],new_device)
             new_device = int(self.redis_at.lpop(REDIS["DEVICES_KEY"]).decode("utf-8"))
         self.redis_at.rpush(REDIS["DEVICES_KEY"],new_device)
 
         pass
 
+def run(controler:WildfireControler):
+    while True:
+        last_msg_id = controler.get_last_message_id()
+        new_msgs = controler.check_redis_new_messages(last_msg_id)
+        for msg in new_msgs:
+            msg_content = msg[1]
+            is_new_device = controler.is_new_device(msg_content)
+            if is_new_device:
+                controler.process_msgs(msg_content)
+            else:
+                controler.add_device(msg_content)
+        controler.check_devices()
+
 
 if __name__ == '__main__':
-
-
     controler = WildfireControler()
     controler.connect_redis()
     run(controler)
