@@ -16,6 +16,9 @@
         "MAX_HUMIDITY_THRESHOLD":5
     },
     "GCLOUD_SCHEDULER": {
-        "COMPRESS_RATE":5
+        "SCHEDULER_RATE":5,
+        "PROJECT":"academic-being-386901",
+        "DATASET":"tcc_wildfire_monitor",
+        "TABLE":"device_stats"
     }
 }

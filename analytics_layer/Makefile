@@ -15,4 +15,5 @@ stop:
 watch-db: 
 	docker exec -it wildfire-analytics-local-db redis-cli
 
-
+start-exporter:
+	python3 gcloud_scheduler.py
