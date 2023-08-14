@@ -2,10 +2,11 @@ import requests
 import random
 import json
 import time 
+import math
 import numpy as np 
-import geopy.distance
+import pandas as pd
 
-CONTEXT_PATH = "config/simulation_context.json"
+CONTEXT_PATH = "simulator/config/qty_sensor_01/data/sensor_data_1.csv"
 
 class SensorSimulate:
     """
@@ -16,77 +17,71 @@ class SensorSimulate:
     def __init__(self, config_dict: dict) -> None:
         
         self.device_id = config_dict["id"]
-        self.temp = config_dict["initial_temperature"]
-        self.humidity =  config_dict["initial_humidity"]
         self.latitude = config_dict["latitude"]
         self.longitude = config_dict["longitude"]
         self.delay = config_dict["delay_time"]
-        self.fire_distance = None
+        self.burned = False
+        self.step = 0
         self.run(self.delay)
         
-    def run(self,frequency: int) -> None:
+    def run(self,delay_time: int) -> None:
         """
         Executa a simulação do sensor:
          
            Args:
-                frequency (int): Tempo de espera entre duas requisições
+                delay_time (int): Tempo de espera entre duas requisições
            
         """
-        while True:
-            self.calculate_fire_distance(CONTEXT_PATH)
+
+        df = pd.read_csv(CONTEXT_PATH)
+        df = df[df["id"]==self.device_id]
+
+        while self.burned == False:
+            self.step = self.step +1
+            actual_row = df[df["step"]==self.step]
+
+            actual_temperature = actual_row.temperature.values[0]
+            actual_humidity = actual_row.humidity.values[0]
             
-            humidity = self.calculate_humidity(self.humidity,self.fire_distance)
+            if actual_temperature > 55:
+                self.burned = True
+                break
 
-            temperature = self.calculate_temperature(self.temp,self.fire_distance)
+            if self.step%self.delay == 0:
+                
+                fields = {
+                    "device_id":self.device_id,
+                    "temperature":actual_humidity,
+                    "humidity":actual_temperature,
+                    "lat":self.latitude,
+                    "lon":self.longitude
+                    }   
+                json_object = json.dumps(fields, indent = 4) 
+                print(json_object)
+                r = requests.post('http://127.0.0.1:8000/insert_data/',data = json_object)
+                if r.status_code == 200:
+                    print(f"Your message has been sent:\n {str(json_object)}")
+                else:
+                    print(f"Something wrong with message:\n {str(json_object)}")
 
-            print(f"\nDevice_id: {self.device_id} - Fire Distance: {round(self.fire_distance,2)} m")
-
-            fields = {
-                "device_id":self.device_id,
-                "temperature":temperature,
-                "humidity":humidity,
-                "lat":self.latitude,
-                "lon":self.longitude
-                }   
-            json_object = json.dumps(fields, indent = 4) 
-
-            r = requests.post('http://127.0.0.1:8000/insert_data/',data = json_object)
-            if r.status_code == 200:
-                print(f"Your message has been sent:\n {str(json_object)}")
-            else:
-                print(f"Something wrong with message:\n {str(json_object)}")
-            time.sleep(frequency)
-
-
-    def calculate_temperature(self, temperature,dist, k=500):
-        if dist < 0:
-            temperature = temperature + (np.random.normal(0,1,1))
-        else:       
-            temperature = temperature + k/dist + (np.random.normal(0,1,1))
-        return temperature[0]
-
-
-    def calculate_humidity(self, humidity, dist, k=1):
-            if dist < 0:
-                humidity =  humidity + (np.random.normal(0,1,1)/100)
-            else:   
-                humidity =  humidity/np.exp(1/(k*dist)) + (np.random.normal(0,1,1)/100)
-            return humidity[0]
-
-
-    def calculate_fire_distance(self, path, k=3):
-        if self.fire_distance == None:
-            file = json.load(open(path))["fire"][0]
-            self.fire_distance = geopy.distance.geodesic((self.latitude,self.longitude),(file["latitude"],file["longitude"])).m 
-        else:
-            self.fire_distance = self.fire_distance - random.random()*k
-        pass
-
+            time.sleep(1)
 
 
 
 #%%
 
-# sensor1 = SensorSimulate(device_id=1,init_temp=20,init_humidity=30,latitude= 22.54,longitude=334.53,delay_time=1)
+
+context = {
+        "id": 3,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":75,
+        "pixel_position_y":75,
+        "delay_time": 10
+}
+
+# sensor1 = SensorSimulate(context)
 
 

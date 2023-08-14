@@ -1,9 +1,8 @@
 import json
-import _thread
 from sensor import SensorSimulate
-import multiprocessing 
 import concurrent.futures
-
+import sys
+import logging
 
 def simulate(json_path: str):
     """
@@ -12,11 +11,18 @@ def simulate(json_path: str):
     
     """
     with concurrent.futures.ProcessPoolExecutor() as executor:
+        logging.basicConfig(filename=f'{json_path}.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
         file = open(json_path)
         data = json.load(file) 
-        cods = executor.map(SensorSimulate,data["sensors"])            
-        for cod in cods:
-            print(cod)
+        cods = executor.map(SensorSimulate,data["sensors"])
+        try:            
+            for cod in cods:
+                print(cod)
+        except:
+            print("Todos os sensores pararam de responder")
 
-if __name__ == '__main__':
-    simulate("config/simulation_context.json")
+if __name__ == '__main__':    
+    if len(sys.argv) != 2:
+        print("Uso: python3 batch_simulate.py <filepath> ")
+        sys.exit(1)
+    simulate(sys.argv[1])

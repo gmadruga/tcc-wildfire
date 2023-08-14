@@ -1,0 +1,164 @@
+{
+ "sensors":  [
+    {
+        "id": 1,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":12.5,
+        "pixel_position_y":12.5,
+        "delay_time": 10
+    },
+    {
+        "id": 2,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "pixel_position_x":12.5,
+        "pixel_position_y":37.5,
+        "delay_time": 10
+    },
+    {
+        "id": 3,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":12.5,
+        "pixel_position_y":62.5,
+        "delay_time": 10
+    },
+    {
+        "id": 4,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "pixel_position_x":12.5,
+        "pixel_position_y":87.5,
+        "delay_time": 10
+    },
+    {
+        "id": 5,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":37.5,
+        "pixel_position_y":12.5,
+        "delay_time": 10
+    },
+    {
+        "id": 6,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "pixel_position_x":37.5,
+        "pixel_position_y":37.5,
+        "delay_time": 10
+    },
+    {
+        "id": 7,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":37.5,
+        "pixel_position_y":62.5,
+        "delay_time": 10
+    },
+    {
+        "id": 8,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "pixel_position_x":37.5,
+        "pixel_position_y":87.5,
+        "delay_time": 10
+    },
+    {
+        "id": 9,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":62.5,
+        "pixel_position_y":12.5,
+        "delay_time": 10
+    },
+    {
+        "id": 10,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "pixel_position_x":62.5,
+        "pixel_position_y":37.5,
+        "delay_time": 10
+    },
+    {
+        "id": 11,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":62.5,
+        "pixel_position_y":62.5,
+        "delay_time": 10
+    },
+    {
+        "id": 12,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "pixel_position_x":62.5,
+        "pixel_position_y":87.5,
+        "delay_time": 10
+    },
+    {
+        "id": 13,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":87.5,
+        "pixel_position_y":12.5,
+        "delay_time": 10
+    },
+    {
+        "id": 14,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "pixel_position_x":87.5,
+        "pixel_position_y":37.5,
+        "delay_time": 10
+    },
+    {
+        "id": 15,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":87.5,
+        "pixel_position_y":62.5,
+        "delay_time": 10
+    },
+    {
+        "id": 16,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "pixel_position_x":87.5,
+        "pixel_position_y":87.5,
+        "delay_time": 10
+    }
+ ]
+}

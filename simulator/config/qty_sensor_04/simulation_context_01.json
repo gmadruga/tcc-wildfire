@@ -6,6 +6,8 @@
         "initial_humidity": 70,
         "latitude": -22.956,
         "longitude": -43.224,
+        "pixel_position_x":25,
+        "pixel_position_y":25,
         "delay_time": 10
     },
     {
@@ -14,6 +16,8 @@
         "initial_humidity": 70,
         "latitude": -22.957,
         "longitude": -43.262,
+        "pixel_position_x":25,
+        "pixel_position_y":75,
         "delay_time": 10
     },
     {
@@ -22,6 +26,8 @@
         "initial_humidity": 70,
         "latitude": -22.939777,
         "longitude": -43.29419823,
+        "pixel_position_x":75,
+        "pixel_position_y":25,
         "delay_time": 10
     },
     {
@@ -30,17 +36,9 @@
         "initial_humidity": 70,
         "latitude": -22.857,
         "longitude": -43.292,
+        "pixel_position_x":75,
+        "pixel_position_y":75,
         "delay_time": 10
     }
- ],
-
- "fire":  [
-    {
-        "latitude": -22.48,
-        "longitude": -43.20,
-        "fire_propagation_rate":  1,
-        "temperature_wave": "",
-        "humidity_wave": ""
-    }
-]
+ ]
 }
