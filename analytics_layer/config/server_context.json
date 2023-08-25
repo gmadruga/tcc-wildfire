@@ -12,11 +12,11 @@
         "TEMPERATURE_THRESHOLD":30,
         "HUMIDITY_THRESHOLD":30,
         "MAX_FACTOR_WITHOUT_MESSAGE":3,
-        "MAX_TEMPERATURE_THRESHOLD":5,
-        "MAX_HUMIDITY_THRESHOLD":5
+        "MAX_TEMPERATURE_THRESHOLD":1,
+        "MAX_HUMIDITY_THRESHOLD":1
     },
     "GCLOUD_SCHEDULER": {
-        "SCHEDULER_RATE":5,
+        "SCHEDULER_RATE":60,
         "PROJECT":"academic-being-386901",
         "DATASET":"tcc_wildfire_monitor",
         "TABLE":"device_stats"

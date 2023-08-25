@@ -256,7 +256,7 @@ class WildfireControler:
             device_status = json.loads(device_status.decode("utf-8"))  # type: ignore
             max_supported_time = datetime.strptime(device_status["last_msg_time"], CONTROLER["TIME_ENCODE"]) + (timedelta(seconds=device_status["mean_delay_time"])*CONTROLER["MAX_FACTOR_WITHOUT_MESSAGE"])
             if  max_supported_time < self.process_loop_started_at:
-                if int(device_status["qty_msgs_recieved"]) > 2:
+                if int(device_status["qty_msgs_recieved"]) > 0:
                     warning_time = datetime.now()
                     warning_message = f"{warning_time} - [WARNING] Device {new_device}: New messages were expected, but they did not appear."
                     warning_message = {"message":warning_message}

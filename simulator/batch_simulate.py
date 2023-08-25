@@ -14,6 +14,7 @@ def simulate(json_path: str):
         logging.basicConfig(filename=f'{json_path}.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
         file = open(json_path)
         data = json.load(file) 
+        logging.info("START NEW SIMULATION")
         cods = executor.map(SensorSimulate,data["sensors"])
         try:            
             for cod in cods:

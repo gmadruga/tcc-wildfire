@@ -6,7 +6,7 @@ import math
 import numpy as np 
 import pandas as pd
 
-CONTEXT_PATH = "simulator/config/qty_sensor_01/data/sensor_data_1.csv"
+CONTEXT_PATH = "simulator/config/qty_sensor_25/data/sensor_data_no_fire.csv"
 
 class SensorSimulate:
     """
@@ -47,24 +47,24 @@ class SensorSimulate:
                 self.burned = True
                 break
 
-            if self.step%self.delay == 0:
-                
-                fields = {
-                    "device_id":self.device_id,
-                    "temperature":actual_humidity,
-                    "humidity":actual_temperature,
-                    "lat":self.latitude,
-                    "lon":self.longitude
-                    }   
-                json_object = json.dumps(fields, indent = 4) 
-                print(json_object)
-                r = requests.post('http://127.0.0.1:8000/insert_data/',data = json_object)
-                if r.status_code == 200:
-                    print(f"Your message has been sent:\n {str(json_object)}")
-                else:
-                    print(f"Something wrong with message:\n {str(json_object)}")
+            # if self.step%self.delay == 0:
+            
+            fields = {
+                "device_id":self.device_id,
+                "temperature":actual_temperature,
+                "humidity":actual_humidity,
+                "lat":self.latitude,
+                "lon":self.longitude
+                }   
+            json_object = json.dumps(fields, indent = 4) 
+            print(json_object)
+            r = requests.post('http://127.0.0.1:8000/insert_data/',data = json_object)
+            if r.status_code == 200:
+                print(f"Your message has been sent:\n {str(json_object)}")
+            else:
+                print(f"Something wrong with message:\n {str(json_object)}")
 
-            time.sleep(1)
+            time.sleep(5)
 
 
 

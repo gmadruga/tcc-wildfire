@@ -113,13 +113,16 @@ class GcloudScheduler:
     def compress_data(self):
         self.get_last_message_id()
         old_messages = self.get_old_redis_messages()
+        print(old_messages)
         old_messages_df = self.convert_messages_to_df(old_messages)
+        print(old_messages_df.head())
         message_stats_df = old_messages_df.groupby("device_id").agg({"temperature": ["min", "max", "mean","std"],"humidity": ["min", "max", "mean","std"]})
         return message_stats_df,old_messages_df
     
     def execute(self):
         data_compressed,messages_df  = self.compress_data()
-        is_sucessful_exported = self.export_data(data_compressed)
+        # is_sucessful_exported = self.export_data(data_compressed)
+        is_sucessful_exported = True
         if is_sucessful_exported:
             self.delete_data(messages_df)
 

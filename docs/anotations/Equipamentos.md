@@ -4,7 +4,7 @@
 A ligação entre o sensor de temperatura e o arduino Uno deve ser feita da seguinte forma:
 
 ![Esquema Sensor Temperatura](/docs/images/img01_como_usar_com_arduino_sensor_de_umidade_e_temperatura_dht11_uno_mega_2560_nano_leonardo_automacao_residencial.jpg "Esquema Sensor Temperatura")
-
+    
 ## Conexão Modulo Arduino - Wifi ESP-8266
 
 Link: https://www.eletrogate.com/modulo-wifi-serial-esp8266-esp-01
