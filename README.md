@@ -1,4 +1,4 @@
-# Proposta de Arquitetura Para Controle de Incendios florestais.
+# Proposta de Arquitetura Para Controle de Incendios Florestais
 
 ## Descrição
 
