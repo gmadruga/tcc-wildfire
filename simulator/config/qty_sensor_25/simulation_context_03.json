@@ -1,0 +1,84 @@
+{
+    "sensors":  [
+       {
+           "id": 17,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.956,
+           "longitude": -43.224,
+           "pixel_position_x":70,
+           "pixel_position_y":30,
+           "delay_time": 5
+       },
+       {
+           "id": 18,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.957,
+           "longitude": -43.262,
+           "pixel_position_x":70,
+           "pixel_position_y":50,
+           "delay_time": 5
+       },
+       {
+           "id": 19,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.939777,
+           "longitude": -43.29419823,
+           "pixel_position_x":70,
+           "pixel_position_y":70,
+           "delay_time": 5
+       },
+       {
+           "id": 20,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.857,
+           "longitude": -43.292,
+           "pixel_position_x":70,
+           "pixel_position_y":90,
+           "delay_time": 5
+       },
+       {
+           "id": 21,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.956,
+           "longitude": -43.224,
+           "pixel_position_x":90,
+           "pixel_position_y":10,
+           "delay_time": 5
+       },
+       {
+           "id": 22,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.957,
+           "longitude": -43.262,
+           "pixel_position_x":90,
+           "pixel_position_y":30,
+           "delay_time": 5
+       },
+       {
+           "id": 23,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.939777,
+           "longitude": -43.29419823,
+           "pixel_position_x":90,
+           "pixel_position_y":50,
+           "delay_time": 5
+       },
+       {
+           "id": 24,
+           "initial_temperature": 25,
+           "initial_humidity": 70,
+           "latitude": -22.857,
+           "longitude": -43.292,
+           "pixel_position_x":90,
+           "pixel_position_y":70,
+           "delay_time": 5
+       }
+    ]
+   }

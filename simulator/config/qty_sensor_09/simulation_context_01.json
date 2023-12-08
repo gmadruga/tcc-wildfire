@@ -1,0 +1,84 @@
+{
+ "sensors":  [
+    {
+        "id": 1,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":16.3,
+        "pixel_position_y":16.3,
+        "delay_time": 5
+    },
+    {
+        "id": 2,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "pixel_position_x":16.3,
+        "pixel_position_y":50.0,
+        "delay_time": 5
+    },
+    {
+        "id": 3,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":16.3,
+        "pixel_position_y":83.3,
+        "delay_time": 5
+    },
+    {
+        "id": 4,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "pixel_position_x":50,
+        "pixel_position_y":16.3,
+        "delay_time": 5
+    },
+    {
+        "id": 5,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":50,
+        "pixel_position_y":50,
+        "delay_time": 5
+    },
+    {
+        "id": 6,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.957,
+        "longitude": -43.262,
+        "pixel_position_x":50,
+        "pixel_position_y":83.3,
+        "delay_time": 5
+    },
+    {
+        "id": 7,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.939777,
+        "longitude": -43.29419823,
+        "pixel_position_x":83.3,
+        "pixel_position_y":16.3,
+        "delay_time": 5
+    },
+    {
+        "id": 8,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.857,
+        "longitude": -43.292,
+        "pixel_position_x":83.3,
+        "pixel_position_y":50,
+        "delay_time": 5
+    }
+ ]
+}

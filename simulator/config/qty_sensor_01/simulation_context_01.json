@@ -1,0 +1,14 @@
+{
+ "sensors":  [
+    {
+        "id": 1,
+        "initial_temperature": 25,
+        "initial_humidity": 70,
+        "latitude": -22.956,
+        "longitude": -43.224,
+        "pixel_position_x":50,
+        "pixel_position_y":50,
+        "delay_time": 5
+    }
+ ]
+}
